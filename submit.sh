@@ -4,7 +4,7 @@
 #SBATCH --gres=gpu:2
 #SBATCH --mem-per-cpu=1G
 #SBATCH --time=4-00:00:00
-#SBATCH --output=op_file_kiba_trial.txt
+#SBATCH --output=op_file_kiba_trial_2.txt
 
 echo "starting"
 PYTHONUNBUFFERED=1

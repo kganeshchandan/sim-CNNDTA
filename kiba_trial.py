@@ -16,10 +16,10 @@ SMILES=list(SMILES.values())
 TARGETS=list(TARGETS.values())
 
 # Device configuration
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 # device = torch.device('cpu')
 # Hyper parameters
-num_epochs = 5
+num_epochs = 20
 # num_classes = 10
 batch_size = 12
 learning_rate = 0.001
@@ -55,7 +55,7 @@ class custom_dataset(torch.utils.data.Dataset):
 dataset = custom_dataset(csv_file = './kiba_all_pairs.csv', smiles=SMILES, targets = TARGETS, LSM=LSM,PSM=PSM)
 full_dataset = dataset
 
-train_size = int(0.8 * len(full_dataset))
+train_size = int(0.7 * len(full_dataset))
 test_size = len(full_dataset) - train_size
 train_dataset, test_dataset = torch.utils.data.random_split(full_dataset, [train_size, test_size])
 
@@ -140,7 +140,7 @@ for epoch in range(num_epochs):
 #     G,P = predicting(model, device, test_loader)
 #     ret = [rmse(G, P), mse(G, P), pearson(G, P), ci(G, P)]
 #     if ret[1] < best_mse:
-#         torch.save(model.state_dict(), model_file_name)
+    torch.save(model.state_dict(), model_file_name)
 #         with open(result_file_name, 'w') as f:
 #             f.write(','.join(map(str, ret)))
 #         best_epoch = epoch+1
